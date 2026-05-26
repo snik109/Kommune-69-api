@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 
+dotenv.config();
+
 import lookupRoutes from "./v1.0.0/routes/lookupRoutes.js";
 import rolleRoutes from "./v1.0.0/routes/rolleRoutes.js";
 import kommentarRoutes from "./v1.0.0/routes/kommentarRoutes.js";
@@ -9,9 +11,7 @@ import tiltakRoutes from "./v1.0.0/routes/tiltakRoutes.js";
 import hendelseRoutes from "./v1.0.0/routes/hendelseRoutes.js";
 import brukerRoutes from "./v1.0.0/routes/brukerRoutes.js";
 
-dotenv.config();
-
-const PORT = 3868
+const PORT = 3868;
 
 const app = express();
 
