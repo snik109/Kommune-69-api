@@ -1,4 +1,4 @@
-const LookupService = require('../services/lookupService');
+import LookupService from '../services/lookupService.js';
 
 const LookupController = {
   // GET /api/lookup/statuser
@@ -38,4 +38,4 @@ const LookupController = {
   },
 };
 
-module.exports = LookupController;
+export default LookupController;

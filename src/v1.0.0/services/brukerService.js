@@ -1,5 +1,5 @@
-const bcrypt = require('bcryptjs');
-const BrukerRepository = require('../repositories/brukerRepository');
+import bcrypt from 'bcryptjs';
+import BrukerRepository from '../repositories/brukerRepository.js';
 
 const SALT_ROUNDS = 12;
 
@@ -81,4 +81,4 @@ const BrukerService = {
   },
 };
 
-module.exports = BrukerService;
+export default BrukerService;

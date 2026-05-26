@@ -1,4 +1,4 @@
-const TiltakService = require('../services/tiltakService');
+import TiltakService from '../services/tiltakService.js';
 
 const TiltakController = {
   // POST /api/hendelser/:hendelseId/tiltak
@@ -36,4 +36,4 @@ const TiltakController = {
   },
 };
 
-module.exports = TiltakController;
+export default TiltakController;

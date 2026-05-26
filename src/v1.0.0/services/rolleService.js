@@ -1,5 +1,5 @@
-const RolleRepository = require('../repositories/rolleRepository');
-const BrukerRepository = require('../repositories/brukerRepository');
+import RolleRepository from '../repositories/rolleRepository.js';
+import BrukerRepository from '../repositories/brukerRepository.js';
 
 const RolleService = {
   async assignRole(brukerId, rolleId) {
@@ -37,4 +37,4 @@ const RolleService = {
   },
 };
 
-module.exports = RolleService;
+export default RolleService;

@@ -1,4 +1,4 @@
-const db = require('../data/db');
+import db from '../data/db.js';
 
 const TiltakRepository = {
   async addTiltak(hendelseId, utfortAv, beskrivelse) {
@@ -39,4 +39,4 @@ const TiltakRepository = {
   },
 };
 
-module.exports = TiltakRepository;
+export default TiltakRepository;

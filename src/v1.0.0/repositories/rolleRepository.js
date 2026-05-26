@@ -1,4 +1,4 @@
-const db = require('../data/db');
+import db from '../data/db.js';
 
 const RolleRepository = {
   // Legg til en rolle på en bruker
@@ -40,4 +40,4 @@ const RolleRepository = {
   },
 };
 
-module.exports = RolleRepository;
+export default RolleRepository;

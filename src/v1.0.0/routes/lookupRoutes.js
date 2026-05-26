@@ -1,5 +1,5 @@
-﻿const express = require('express');
-const LookupController = require('../controller/lookupController');
+﻿import express from 'express';
+import LookupController from '../controller/lookupController.js';
 
 const router = express.Router();
 
@@ -8,4 +8,4 @@ router.get('/lookup/prioriteringer', LookupController.getPriorities);
 router.get('/lookup/kategorier', LookupController.getCategories);
 router.get('/lookup/roller', LookupController.getRoles);
 
-module.exports = router;
+export default router;

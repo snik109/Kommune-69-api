@@ -1,4 +1,4 @@
-const HendelseRepository = require('../repositories/hendelseRepository');
+import HendelseRepository from '../repositories/hendelseRepository.js';
 
 const HendelseService = {
   async create(data) {
@@ -97,4 +97,4 @@ const HendelseService = {
   },
 };
 
-module.exports = HendelseService;
+export default HendelseService;

@@ -1,5 +1,5 @@
-const KommentarRepository = require('../repositories/kommentarRepository');
-const HendelseRepository = require('../repositories/hendelseRepository');
+import KommentarRepository from '../repositories/kommentarRepository.js';
+import HendelseRepository from '../repositories/hendelseRepository.js';
 
 const KommentarService = {
   async create(hendelseId, brukerId, tekst) {
@@ -45,4 +45,4 @@ const KommentarService = {
   },
 };
 
-module.exports = KommentarService;
+export default KommentarService;

@@ -1,4 +1,4 @@
-const db = require('../data/db');
+import db from '../data/db.js';
 
 const KommentarRepository = {
   async create(hendelseId, brukerId, tekst) {
@@ -40,4 +40,4 @@ const KommentarRepository = {
   },
 };
 
-module.exports = KommentarRepository;
+export default KommentarRepository;

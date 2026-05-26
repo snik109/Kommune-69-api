@@ -1,5 +1,5 @@
-const TiltakRepository = require('../repositories/tiltakRepository');
-const HendelseRepository = require('../repositories/hendelseRepository');
+import TiltakRepository from '../repositories/tiltakRepository.js';
+import HendelseRepository from '../repositories/hendelseRepository.js';
 
 const TiltakService = {
   async add(hendelseId, utfortAv, beskrivelse) {
@@ -39,4 +39,4 @@ const TiltakService = {
   },
 };
 
-module.exports = TiltakService;
+export default TiltakService;

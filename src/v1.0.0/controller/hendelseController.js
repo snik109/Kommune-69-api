@@ -1,4 +1,4 @@
-const HendelseService = require('../services/hendelseService');
+import HendelseService from '../services/hendelseService.js';
 
 const HendelseController = {
   // POST /api/hendelser
@@ -115,4 +115,4 @@ const HendelseController = {
   },
 };
 
-module.exports = HendelseController;
+export default HendelseController;

@@ -1,5 +1,5 @@
-﻿const express = require('express');
-const HendelseController = require('../controller/hendelseController');
+﻿import express from 'express';
+import HendelseController from '../controller/hendelseController.js';
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.get('/hendelser/:id/kategorier', HendelseController.getCategories);
 router.post('/hendelser/:id/kategorier', HendelseController.addCategory);
 router.delete('/hendelser/:id/kategorier/:kategoriId', HendelseController.removeCategory);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const db = require('../data/db');
+import db from '../data/db.js';
 
 const LookupRepository = {
   async getAllStatuses() {
@@ -22,4 +22,4 @@ const LookupRepository = {
   },
 };
 
-module.exports = LookupRepository;
+export default LookupRepository;

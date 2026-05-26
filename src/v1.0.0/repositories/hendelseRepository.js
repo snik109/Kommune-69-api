@@ -1,4 +1,4 @@
-const db = require('../data/db');
+import db from '../data/db.js';
 
 const HendelseRepository = {
   // Opprett ny hendelse
@@ -126,4 +126,4 @@ const HendelseRepository = {
   },
 };
 
-module.exports = HendelseRepository;
+export default HendelseRepository;

@@ -1,4 +1,4 @@
-const db = require('../data/db');
+import db from '../data/db.js';
 
 const BrukerRepository = {
   async findByUsername(username) {
@@ -71,4 +71,4 @@ const BrukerRepository = {
   },
 };
 
-module.exports = BrukerRepository;
+export default BrukerRepository;

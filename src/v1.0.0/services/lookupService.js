@@ -1,4 +1,4 @@
-const LookupRepository = require('../repositories/lookupRepository');
+import LookupRepository from '../repositories/lookupRepository.js';
 
 const LookupService = {
   async getAllStatuses() {
@@ -18,4 +18,4 @@ const LookupService = {
   },
 };
 
-module.exports = LookupService;
+export default LookupService;

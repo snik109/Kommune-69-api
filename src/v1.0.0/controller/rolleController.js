@@ -1,4 +1,4 @@
-const RolleService = require('../services/rolleService');
+import RolleService from '../services/rolleService.js';
 
 const RolleController = {
   // POST /api/brukere/:brukerId/roller
@@ -35,4 +35,4 @@ const RolleController = {
   },
 };
 
-module.exports = RolleController;
+export default RolleController;

@@ -1,4 +1,4 @@
-const BrukerService = require('../services/brukerService');
+import BrukerService from '../services/brukerService.js';
 
 const BrukerController = {
   // POST /api/brukere/register
@@ -87,4 +87,4 @@ const BrukerController = {
   },
 };
 
-module.exports = BrukerController;
+export default BrukerController;

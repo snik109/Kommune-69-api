@@ -1,5 +1,5 @@
-﻿const express = require('express');
-const BrukerController = require('../controller/brukerController');
+﻿import express from 'express';
+import BrukerController from '../controller/brukerController.js';
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.get('/brukere/:id/roller', BrukerController.getWithRoles);
 router.put('/brukere/:id', BrukerController.update);
 router.delete('/brukere/:id', BrukerController.delete);
 
-module.exports = router;
+export default router;

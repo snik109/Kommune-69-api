@@ -1,5 +1,5 @@
-const KommentarService = require('../services/kommentarService');
-const RolleRepository = require('../repositories/rolleRepository');
+import KommentarService from '../services/kommentarService.js';
+import RolleService from '../services/rolleService.js';
 
 const KommentarController = {
   // POST /api/hendelser/:hendelseId/kommentarer
@@ -29,7 +29,7 @@ const KommentarController = {
   // DELETE /api/kommentarer/:id
   async delete(req, res, next) {
     try {
-      const isAdmin = await RolleRepository.userHasRole(req.session.brukerId, 'Admin');
+      const isAdmin = await RolleService.userHasRole(req.session.brukerId, 'Admin');
       await KommentarService.delete(
         Number(req.params.id),
         req.session.brukerId,
@@ -42,4 +42,4 @@ const KommentarController = {
   },
 };
 
-module.exports = KommentarController;
+export default KommentarController;
