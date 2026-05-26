@@ -1,0 +1,20 @@
+const db = require('../data/db');
+
+const LookupRepository = {
+  async getAllStatuses() {
+    const [rows] = await db.query('SELECT * FROM Status ORDER BY Navn ASC');
+    return rows;
+  },
+
+  async getAllPriorities() {
+    const [rows] = await db.query('SELECT * FROM Prioritering ORDER BY Verdi DESC');
+    return rows;
+  },
+
+  async getAllCategories() {
+    const [rows] = await db.query('SELECT * FROM Kategori ORDER BY Navn ASC');
+    return rows;
+  }
+};
+
+module.exports = LookupRepository;
