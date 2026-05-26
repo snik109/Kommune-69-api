@@ -1,17 +1,18 @@
 ﻿import express from 'express';
 import HendelseController from '../controller/hendelseController.js';
+import { authenticateToken, authorizeRole } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/hendelser', HendelseController.create);
-router.get('/hendelser', HendelseController.getAll);
-router.get('/hendelser/:id', HendelseController.getById);
-router.patch('/hendelser/:id/status', HendelseController.updateStatus);
-router.patch('/hendelser/:id/prioritering', HendelseController.updatePriority);
-router.patch('/hendelser/:id/ansvarlig', HendelseController.updateResponsible);
-router.delete('/hendelser/:id', HendelseController.delete);
-router.get('/hendelser/:id/kategorier', HendelseController.getCategories);
-router.post('/hendelser/:id/kategorier', HendelseController.addCategory);
-router.delete('/hendelser/:id/kategorier/:kategoriId', HendelseController.removeCategory);
+router.post('/', authenticateToken, HendelseController.create);
+router.get('/', authenticateToken, HendelseController.getAll);
+router.get('/:id', authenticateToken, HendelseController.getById);
+router.patch('/:id/status', authenticateToken, authorizeRole(['admin', 'management']), HendelseController.updateStatus);
+router.patch('/:id/prioritering', authenticateToken, authorizeRole(['admin', 'management']), HendelseController.updatePriority);
+router.patch('/:id/ansvarlig', authenticateToken, authorizeRole(['admin', 'management']), HendelseController.updateResponsible);
+router.delete('/:id', authenticateToken, authorizeRole(['admin']), HendelseController.delete);
+router.get('/:id/kategorier', authenticateToken, HendelseController.getCategories);
+router.post('/:id/kategorier', authenticateToken, authorizeRole(['admin', 'management']), HendelseController.addCategory);
+router.delete('/:id/kategorier/:kategoriId', authenticateToken, authorizeRole(['admin']), HendelseController.removeCategory);
 
 export default router;
