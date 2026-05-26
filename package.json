@@ -1,4 +1,12 @@
 {
+  "type": "module",
+  "version": "1.0.0",
+  "description": "API for Kommune 69",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
