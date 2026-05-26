@@ -1,4 +1,4 @@
-const db = require('./db');
+const db = require('../data/db');
 
 const KommentarRepository = {
   async create(hendelseId, brukerId, tekst) {
@@ -10,10 +10,21 @@ const KommentarRepository = {
     return result.insertId;
   },
 
+  async findById(kommentarId) {
+    const sql = `
+      SELECT k.*, b.DisplayName
+      FROM Kommentarer k
+      JOIN Brukere b ON k.Bruker_ID = b.Bruker_ID
+      WHERE k.Kommentar_ID = ?
+    `;
+    const [rows] = await db.query(sql, [kommentarId]);
+    return rows[0] || null;
+  },
+
   // Hent historikk for en hendelse med brukernavn
   async getByHendelse(hendelseId) {
     const sql = `
-      SELECT k.*, b.DisplayName 
+      SELECT k.*, b.DisplayName
       FROM Kommentarer k
       JOIN Brukere b ON k.Bruker_ID = b.Bruker_ID
       WHERE k.Hendelse_ID = ?
@@ -26,7 +37,7 @@ const KommentarRepository = {
   async delete(kommentarId) {
     const [result] = await db.query('DELETE FROM Kommentarer WHERE Kommentar_ID = ?', [kommentarId]);
     return result.affectedRows > 0;
-  }
+  },
 };
 
 module.exports = KommentarRepository;

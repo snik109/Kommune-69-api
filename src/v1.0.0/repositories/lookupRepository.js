@@ -14,7 +14,12 @@ const LookupRepository = {
   async getAllCategories() {
     const [rows] = await db.query('SELECT * FROM Kategori ORDER BY Navn ASC');
     return rows;
-  }
+  },
+
+  async getAllRoles() {
+    const [rows] = await db.query('SELECT * FROM Roller ORDER BY Navn ASC');
+    return rows;
+  },
 };
 
 module.exports = LookupRepository;
