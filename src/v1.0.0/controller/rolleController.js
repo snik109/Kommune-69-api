@@ -28,7 +28,7 @@ const RolleController = {
   async getRolesForUser(req, res, next) {
     try {
       const roller = await RolleService.getRolesForUser(Number(req.params.brukerId));
-      res.json(roller);
+      res.status(200).json({ roller });
     } catch (err) {
       next(err);
     }
@@ -47,7 +47,7 @@ const RolleController = {
   async getAll(req, res, next) {
     try {
       const roller = await RolleService.getAll();
-      res.json(roller);
+      res.status(200).json(roller);
     } catch (err) {
       next(err);
     }
