@@ -44,7 +44,7 @@ const RolleRepository = {
     return result.insertId;
   },
   async getAll() {
-    const sql = 'SELECT Rolle_ID, Navn, Beskrivelse FROM Roller';
+    const sql = 'SELECT * FROM Roller';
     const [rows] = await db.query(sql);
     return rows;
   }

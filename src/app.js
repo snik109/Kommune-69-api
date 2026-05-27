@@ -21,6 +21,8 @@ app.use(cors({
 
 app.use(express.json());
 
+app.set('etag', false);
+
 // Setup Routes
 app.use('/api/v1.0.0/lookup', lookupRoutes);
 app.use('/api/v1.0.0/roller', rolleRoutes);
