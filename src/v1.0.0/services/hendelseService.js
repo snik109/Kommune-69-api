@@ -3,16 +3,37 @@ import HendelseRepository from '../repositories/hendelseRepository.js';
 const HendelseService = {
   async create(data) {
     const { ansvarligBruker, opprettetAv, statusId, prioriteringId, tittel, beskrivelse } = data;
+
     if (!tittel || !opprettetAv) {
       const err = new Error('Tittel og opprettetAv er påkrevd.');
       err.status = 400;
       throw err;
     }
+
+    const parsedStatusId = statusId === '' || statusId === undefined || statusId === null
+      ? null
+      : Number(statusId);
+    const parsedPrioriteringId = prioriteringId === '' || prioriteringId === undefined || prioriteringId === null
+      ? null
+      : Number(prioriteringId);
+
+    if (parsedStatusId === null || !Number.isInteger(parsedStatusId) || parsedStatusId <= 0) {
+      const err = new Error('statusId må være et gyldig tall.');
+      err.status = 400;
+      throw err;
+    }
+
+    if (parsedPrioriteringId === null || !Number.isInteger(parsedPrioriteringId) || parsedPrioriteringId <= 0) {
+      const err = new Error('prioriteringId må være et gyldig tall.');
+      err.status = 400;
+      throw err;
+    }
+
     const id = await HendelseRepository.create({
       ansvarligBruker,
       opprettetAv,
-      statusId,
-      prioriteringId,
+      statusId: parsedStatusId,
+      prioriteringId: parsedPrioriteringId,
       tittel,
       beskrivelse,
     });
@@ -38,8 +59,14 @@ const HendelseService = {
   },
 
   async updateStatus(hendelseId, statusId) {
+    const parsedStatusId = Number(statusId);
+    if (!Number.isInteger(parsedStatusId) || parsedStatusId <= 0) {
+      const err = new Error('statusId må være et gyldig tall.');
+      err.status = 400;
+      throw err;
+    }
     await this.getById(hendelseId);
-    const updated = await HendelseRepository.updateStatus(hendelseId, statusId);
+    const updated = await HendelseRepository.updateStatus(hendelseId, parsedStatusId);
     if (!updated) {
       const err = new Error('Kunne ikke oppdatere status.');
       err.status = 500;
@@ -49,8 +76,14 @@ const HendelseService = {
   },
 
   async updatePriority(hendelseId, prioriteringId) {
+    const parsedPrioriteringId = Number(prioriteringId);
+    if (!Number.isInteger(parsedPrioriteringId) || parsedPrioriteringId <= 0) {
+      const err = new Error('prioriteringId må være et gyldig tall.');
+      err.status = 400;
+      throw err;
+    }
     await this.getById(hendelseId);
-    const updated = await HendelseRepository.updatePriority(hendelseId, prioriteringId);
+    const updated = await HendelseRepository.updatePriority(hendelseId, parsedPrioriteringId);
     if (!updated) {
       const err = new Error('Kunne ikke oppdatere prioritering.');
       err.status = 500;

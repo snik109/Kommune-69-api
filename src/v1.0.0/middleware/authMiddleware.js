@@ -20,19 +20,19 @@ export function authenticateToken(req, res, next) {
 }
 
 export function authorizeRole(...allowedRoles) {
+    // Flatten ensures ['admin'] and 'admin' both work
+    const rolesToAllow = allowedRoles.flat(); 
+
     return (req, res, next) => {
         if (!req.user || !req.user.roles) {
-            return res.status(403).json({ error: "Access denied" });
+            return res.status(403).json({ error: "Access denied: No roles" });
         }
 
         const hasRole = req.user.roles.some(role =>
-            allowedRoles.includes(role)
+            rolesToAllow.includes(role)
         );
 
-        if (!hasRole) {
-            return res.status(403).json({ error: "Access denied" });
-        }
-
+        if (!hasRole) return res.status(403).json({ error: "Access denied" });
         next();
     };
 }
