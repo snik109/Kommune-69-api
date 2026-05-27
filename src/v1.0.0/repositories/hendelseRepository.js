@@ -22,8 +22,8 @@ const HendelseRepository = {
   // Hent én hendelse med status, prioritering og ansvarlig bruker
   async findById(hendelseId) {
     const sql = `
-      SELECT h.*,
-             s.Navn AS StatusNavn,
+      SELECT h.*, 
+             s.Navn AS StatusNavn, 
              p.Navn AS PrioriteringNavn, p.Verdi AS PrioriteringVerdi,
              b.DisplayName AS AnsvarligNavn,
              o.DisplayName AS OpprettetAvNavn
@@ -41,14 +41,20 @@ const HendelseRepository = {
   // Hent alle hendelser (med join-data for listevisning)
   async getAll() {
     const sql = `
-      SELECT h.Hendelse_ID, h.Tittel, h.Tidspunkt_Opprettet, h.Tidspunkt_Sist_Redigert,
+      SELECT h.Hendelse_ID, 
+             h.Tittel, 
+             h.Beskrivelse,
+             h.Tidspunkt_Opprettet, 
+             h.Tidspunkt_Sist_Redigert,
              s.Navn AS StatusNavn,
              p.Navn AS PrioriteringNavn, p.Verdi AS PrioriteringVerdi,
-             b.DisplayName AS AnsvarligNavn
+             b.DisplayName AS AnsvarligNavn,
+             o.DisplayName AS OpprettetAvNavn
       FROM Hendelse h
       LEFT JOIN Status s ON h.Status_ID = s.Status_ID
       LEFT JOIN Prioritering p ON h.Prioritering_ID = p.Prioritering_ID
       LEFT JOIN Brukere b ON h.Ansvarlig_Bruker = b.Bruker_ID
+      LEFT JOIN Brukere o ON h.OpprettetAv = o.Bruker_ID
       ORDER BY p.Verdi DESC, h.Tidspunkt_Opprettet DESC
     `;
     const [rows] = await db.query(sql);
