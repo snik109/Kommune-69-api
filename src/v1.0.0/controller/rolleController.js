@@ -33,6 +33,25 @@ const RolleController = {
       next(err);
     }
   },
+
+  // POST /api/roller
+  async create(req, res, next) {
+    try {
+      const { navn, beskrivelse } = req.body;
+      const id = await RolleService.create({ navn, beskrivelse });
+      res.status(201).json({ id, navn, beskrivelse });
+    } catch (err) {
+      next(err);
+    }
+  },
+  async getAll(req, res, next) {
+    try {
+      const roller = await RolleService.getAll();
+      res.json(roller);
+    } catch (err) {
+      next(err);
+    }
+  }
 };
 
 export default RolleController;

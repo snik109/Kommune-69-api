@@ -38,6 +38,16 @@ const RolleRepository = {
     const [rows] = await db.query(sql, [brukerId, rolleNavn]);
     return rows[0].count > 0;
   },
+  async create({ navn, beskrivelse }) {
+    const sql = 'INSERT INTO Roller (Navn, Beskrivelse) VALUES (?, ?)';
+    const [result] = await db.query(sql, [navn, beskrivelse]);
+    return result.insertId;
+  },
+  async getAll() {
+    const sql = 'SELECT Rolle_ID, Navn, Beskrivelse FROM Roller';
+    const [rows] = await db.query(sql);
+    return rows;
+  }
 };
 
 export default RolleRepository;

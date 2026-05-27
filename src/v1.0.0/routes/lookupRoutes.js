@@ -7,6 +7,7 @@ const router = express.Router();
 router.get('/statuser', authenticateToken, LookupController.getStatuses);
 router.get('/prioriteringer', authenticateToken, LookupController.getPriorities);
 router.get('/kategorier', authenticateToken, LookupController.getCategories);
+router.post('/kategorier', authenticateToken, authorizeRole(['admin']), LookupController.createCategory);
 router.get('/roller', authenticateToken, LookupController.getRoles);
 
 export default router;

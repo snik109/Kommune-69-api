@@ -16,6 +16,12 @@ const LookupRepository = {
     return rows;
   },
 
+  async createCategory({ navn, beskrivelse }) {
+    const sql = 'INSERT INTO Kategori (Navn, Beskrivelse) VALUES (?, ?)';
+    const [result] = await db.query(sql, [navn, beskrivelse]);
+    return result.insertId;
+  },
+
   async getAllRoles() {
     const [rows] = await db.query('SELECT * FROM Roller ORDER BY Navn ASC');
     return rows;

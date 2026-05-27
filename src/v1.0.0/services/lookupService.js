@@ -12,6 +12,15 @@ const LookupService = {
   async getAllCategories() {
     return LookupRepository.getAllCategories();
   },
+  
+  async createCategory({ navn, beskrivelse }) {
+    if (!navn) {
+      const err = new Error('Kategorienavn er påkrevd.');
+      err.status = 400;
+      throw err;
+    }
+    return LookupRepository.createCategory({ navn, beskrivelse });
+  },
 
   async getAllRoles() {
     return LookupRepository.getAllRoles();

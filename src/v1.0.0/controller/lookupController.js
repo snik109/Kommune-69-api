@@ -27,6 +27,20 @@ const LookupController = {
       next(err);
     }
   },
+  
+  async createCategory(req, res, next) {
+    try {
+      const { navn, beskrivelse } = req.body;
+      const id = await LookupService.createCategory({ navn, beskrivelse });
+      res.status(201).json({
+        id,
+        navn,
+        beskrivelse,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
 
   // GET /api/lookup/roller
   async getRoles(req, res, next) {

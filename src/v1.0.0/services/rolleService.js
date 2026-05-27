@@ -35,6 +35,17 @@ const RolleService = {
   async userHasRole(brukerId, rolleNavn) {
     return RolleRepository.userHasRole(brukerId, rolleNavn);
   },
+  async create({ navn, beskrivelse }) {
+    if (!navn) {
+      const err = new Error('Rollenavn er påkrevd.');
+      err.status = 400;
+      throw err;
+    }
+    return RolleRepository.create({ navn, beskrivelse });
+  },
+  async getAll() {
+    return RolleRepository.getAll();
+  }
 };
 
 export default RolleService;
