@@ -7,7 +7,7 @@ const KommentarController = {
     try {
       const kommentar = await KommentarService.create(
         Number(req.params.hendelseId),
-        req.session.brukerId,
+        req.user?.Bruker_ID,
         req.body.tekst
       );
       res.status(201).json(kommentar);
@@ -29,10 +29,11 @@ const KommentarController = {
   // DELETE /api/kommentarer/:id
   async delete(req, res, next) {
     try {
-      const isAdmin = await RolleService.userHasRole(req.session.brukerId, 'Admin');
+      const brukerId = req.user?.Bruker_ID;
+      const isAdmin = await RolleService.userHasRole(brukerId, 'Admin');
       await KommentarService.delete(
         Number(req.params.id),
-        req.session.brukerId,
+        brukerId,
         isAdmin
       );
       res.status(204).send();

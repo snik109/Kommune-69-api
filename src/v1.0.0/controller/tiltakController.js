@@ -6,7 +6,7 @@ const TiltakController = {
     try {
       const tiltak = await TiltakService.add(
         Number(req.params.hendelseId),
-        req.session.brukerId,
+        req.user?.Bruker_ID,
         req.body.beskrivelse
       );
       res.status(201).json(tiltak);

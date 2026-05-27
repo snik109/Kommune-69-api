@@ -29,8 +29,9 @@ const BrukerService = {
       err.status = 401;
       throw err;
     }
-    // Return user without password hash
-    const { PasswordHash, ...safeUser } = bruker;
+
+    const brukerWithRoles = await BrukerRepository.getWithRoles(bruker.Bruker_ID);
+    const { PasswordHash, ...safeUser } = brukerWithRoles || bruker;
     return safeUser;
   },
 

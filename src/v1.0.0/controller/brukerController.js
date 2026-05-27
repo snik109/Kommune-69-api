@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import BrukerService from '../services/brukerService.js';
 
 const BrukerController = {
@@ -16,10 +17,32 @@ const BrukerController = {
     try {
       const { username, password } = req.body;
       const bruker = await BrukerService.authenticate(username, password);
-      // Attach to session (assumes express-session or similar)
-      req.session.brukerId = bruker.Bruker_ID;
-      req.session.username = bruker.Username;
-      res.json(bruker);
+
+      const roles = (bruker.roller ?? [])
+        .map((r) => r.Navn?.toLowerCase())
+        .filter(Boolean);
+
+      const tokenPayload = {
+        Bruker_ID: bruker.Bruker_ID,
+        Username: bruker.Username,
+        roles,
+      };
+
+      const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, {
+        expiresIn: '1h',
+      });
+
+      res.json({
+        token,
+        user: {
+          Bruker_ID: bruker.Bruker_ID,
+          Username: bruker.Username,
+          DisplayName: bruker.DisplayName,
+          FullName: bruker.FullName,
+          Email: bruker.Email,
+          roles,
+        },
+      });
     } catch (err) {
       next(err);
     }
@@ -28,9 +51,7 @@ const BrukerController = {
   // POST /api/brukere/logout
   async logout(req, res, next) {
     try {
-      req.session.destroy(() => {
-        res.json({ message: 'Logget ut.' });
-      });
+      res.json({ message: 'Logget ut.' });
     } catch (err) {
       next(err);
     }

@@ -4,7 +4,7 @@ const HendelseController = {
   // POST /api/hendelser
   async create(req, res, next) {
     try {
-      const data = { ...req.body, opprettetAv: req.session.brukerId };
+      const data = { ...req.body, opprettetAv: req.user?.Bruker_ID };
       const hendelse = await HendelseService.create(data);
       res.status(201).json(hendelse);
     } catch (err) {
