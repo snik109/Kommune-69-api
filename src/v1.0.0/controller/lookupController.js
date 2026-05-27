@@ -4,7 +4,8 @@ const LookupController = {
   // GET /api/lookup/statuser
   async getStatuses(req, res, next) {
     try {
-      res.json(await LookupService.getAllStatuses());
+      const result = await LookupService.getAllStatuses();
+      res.status(200).json({ statuser: result });
     } catch (err) {
       next(err);
     }
@@ -13,7 +14,8 @@ const LookupController = {
   // GET /api/lookup/prioriteringer
   async getPriorities(req, res, next) {
     try {
-      res.json(await LookupService.getAllPriorities());
+      const result = await LookupService.getAllPriorities();
+      res.status(200).json({ prioriteringer: result });
     } catch (err) {
       next(err);
     }
@@ -22,12 +24,13 @@ const LookupController = {
   // GET /api/lookup/kategorier
   async getCategories(req, res, next) {
     try {
-      res.json(await LookupService.getAllCategories());
+      const result = await LookupService.getAllCategories();
+      res.status(200).json({ kategorier: result });
     } catch (err) {
       next(err);
     }
   },
-  
+
   async createCategory(req, res, next) {
     try {
       const { navn, beskrivelse } = req.body;
