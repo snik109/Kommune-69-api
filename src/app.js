@@ -19,6 +19,8 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(express.json());
+
 // Setup Routes
 app.use('/api/v1.0.0/lookup', lookupRoutes);
 app.use('/api/v1.0.0/roller', rolleRoutes);
