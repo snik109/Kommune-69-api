@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/register', authenticateToken, authorizeRole(['admin']), BrukerController.register);
 router.post('/login', BrukerController.login);
 router.post('/logout', BrukerController.logout);
-router.get('/', authenticateToken, authorizeRole(['admin']), BrukerController.getAll);
+router.get('/', authenticateToken, authorizeRole(['admin', 'management']), BrukerController.getAll);
 router.get('/:id', authenticateToken, authorizeRole(['admin']), BrukerController.getById);
 router.get('/:id/roller', authenticateToken, authorizeRole(['admin']), BrukerController.getWithRoles);
 router.put('/:id', authenticateToken, authorizeRole(['admin']), BrukerController.update);
